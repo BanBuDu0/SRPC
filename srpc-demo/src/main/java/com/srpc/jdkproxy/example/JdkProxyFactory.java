@@ -24,6 +24,8 @@ public class JdkProxyFactory {
                     //调用方法之后，我们同样可以添加自己的操作
                     System.out.println("after method " + method.getName());
                     break;
+                case "get":
+                    System.out.println("get");
                 default:
                     break;
             }
@@ -38,12 +40,7 @@ public class JdkProxyFactory {
         return Proxy.newProxyInstance(
                 target.getClass().getClassLoader(),
                 target.getClass().getInterfaces(),
-                new InvocationHandler() {
-                    @Override
-                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                        return null;
-                    }
-                }
+                new ExampleInvocationHandler(target)
         );
     }
 
